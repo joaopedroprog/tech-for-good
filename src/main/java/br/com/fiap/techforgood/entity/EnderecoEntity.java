@@ -1,80 +1,47 @@
 package br.com.fiap.techforgood.entity;
 
+import br.com.fiap.techforgood.dto.EnderecoDTO;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="tb_endereco")
 public class EnderecoEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+	@Column(name = "id_endereco")
 	private Long idEndereco;
-	
+
+	@Column(name = "ds_logradouro")
 	private String dsLogradouro;
+
+	@Column(name = "nr_numero")
 	private String nrNumero;
+
+	@Column(name = "ds_complemento")
 	private String dsComplemento;
+
+	@Column(name = "nr_cep")
 	private String nrCep;
 	
 	@ManyToOne
-	@JoinColumn(name="idBairro", referencedColumnName="idBairro")
+	@JoinColumn(name="id_bairro")
 	private BairroEntity bairro;
 
-	public Long getIdEndereco() {
-		return idEndereco;
+	public EnderecoEntity(EnderecoDTO enderecoDTO){
+		this.idEndereco = enderecoDTO.getIdEndereco();
+		this.dsLogradouro = enderecoDTO.getDsLogradouro();
+		this.nrNumero = enderecoDTO.getNrNumero();
+		this.dsComplemento = enderecoDTO.getDsComplemento();
+		this.nrCep = enderecoDTO.getNrCep();
+		bairro = new BairroEntity(enderecoDTO.getBairro());
 	}
-
-	public void setIdEndereco(Long idEndereco) {
-		this.idEndereco = idEndereco;
-	}
-
-	public String getDsLogradouro() {
-		return dsLogradouro;
-	}
-
-	public void setDsLogradouro(String dsLogradouro) {
-		this.dsLogradouro = dsLogradouro;
-	}
-
-	public String getNrNumero() {
-		return nrNumero;
-	}
-
-	public void setNrNumero(String nrNumero) {
-		this.nrNumero = nrNumero;
-	}
-
-	public String getDsComplemento() {
-		return dsComplemento;
-	}
-
-	public void setDsComplemento(String dsComplemento) {
-		this.dsComplemento = dsComplemento;
-	}
-
-	public String getNrCep() {
-		return nrCep;
-	}
-
-	public void setNrCep(String nrCep) {
-		this.nrCep = nrCep;
-	}
-
-	public BairroEntity getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(BairroEntity bairro) {
-		this.bairro = bairro;
-	}
-	
 
 }
