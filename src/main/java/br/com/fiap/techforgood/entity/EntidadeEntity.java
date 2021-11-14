@@ -1,15 +1,22 @@
 package br.com.fiap.techforgood.entity;
 
+import br.com.fiap.techforgood.dto.EnderecoDTO;
+import br.com.fiap.techforgood.dto.EntidadeDTO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_usuario")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EntidadeEntity {
 
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long idEntidade;
 
     private String nmEntidade;
@@ -20,12 +27,22 @@ public class EntidadeEntity {
 
     private String nrCnpj;
 
-    @OneToMany
-    @Column(name = "tb_endereco_id_endereco")
-    private Long idEndereco;
+    @ManyToOne
+    @JoinColumn(name = "id_endereco")
+    private EnderecoEntity endereco;
 
-    @OneToMany
-    @Column(name = "tb_tipo_id_tipo")
-    private Long isTipo;
+    @ManyToOne
+    @JoinColumn(name = "id_tipo")
+    private TipoEntity tipo;
+
+    public EntidadeEntity(EntidadeDTO entidadeDTO){
+        this.idEntidade = entidadeDTO.getIdEntidade();
+        this.nmEntidade = entidadeDTO.getNmEntidade();
+        this.dsEntidade = entidadeDTO.getDsEntidade();
+        this.nrVoluntarios = entidadeDTO.getNrVoluntarios();
+        this.nrCnpj = entidadeDTO.getNrCnpj();
+        endereco = new EnderecoEntity(entidadeDTO.getEndereco());
+        tipo = new TipoEntity(entidadeDTO.getTipo());
+    }
 
 }
