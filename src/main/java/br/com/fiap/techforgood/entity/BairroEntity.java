@@ -7,20 +7,24 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "tb_bairro")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name="tb_bairro")
 public class BairroEntity {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_bairro")
+	private Long idBairro;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idBairro;
-    private String dsBairro;
+	@Column(name = "ds_bairro")
+	private String dsBairro;
 
-    public BairroEntity(BairroDTO bairroDTO){
-        this.idBairro = bairroDTO.getIdBairro();
-        this.dsBairro = bairroDTO.getDsBairro();
-    }
+	public BairroEntity(BairroDTO bairroDTO){
+		this.idBairro = bairroDTO.getIdBairro();
+		this.dsBairro = bairroDTO.getDsBairro();
+	}
+
 }

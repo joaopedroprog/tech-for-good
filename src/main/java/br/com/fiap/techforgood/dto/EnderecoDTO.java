@@ -15,7 +15,7 @@ public class EnderecoDTO {
 
     private Long idEndereco;
     private String dsLogradouro;
-    private Integer nrNumero;
+    private String nrNumero;
     private String dsComplemento;
     private String nrCep;
     private BairroDTO bairro;
