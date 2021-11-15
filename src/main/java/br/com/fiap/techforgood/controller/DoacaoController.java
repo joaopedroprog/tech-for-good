@@ -37,4 +37,16 @@ public class DoacaoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao buscar entidade!");
         }
     }
+
+    @ResponseBody
+    @GetMapping("/get-doacao-entidade/{idEntidade}")
+    public ResponseEntity getDoacaoEntidade(@PathVariable Long idEntidade) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(doacaoService.getDoacaoEntidade(idEntidade));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao buscar entidade!");
+        }
+    }
 }

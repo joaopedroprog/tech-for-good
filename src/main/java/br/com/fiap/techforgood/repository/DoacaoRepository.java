@@ -13,5 +13,6 @@ public interface DoacaoRepository extends JpaRepository<DoacaoEntity, Long> {
     @Query(value="select * from tb_doacao where id_usuario = :idUsuario", nativeQuery=true)
     List<DoacaoEntity> buscaIdUsuario(Long idUsuario);
 
-   // List<DoacaoEntity> findByIdEntidade(Long idEntidade);
+    @Query(value="select * from tb_doacao where id_entidade = :idEntidade", nativeQuery=true)
+    List<DoacaoEntity> buscaIdEntidade(Long idEntidade);
 }

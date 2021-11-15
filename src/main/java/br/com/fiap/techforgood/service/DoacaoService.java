@@ -27,4 +27,9 @@ public class DoacaoService {
         return lista;
     }
 
+    public List<DoacaoEntity> getDoacaoEntidade(Long idEntidade) {
+        List<DoacaoEntity> lista = doacaoRepository.buscaIdEntidade(idEntidade);
+        return lista;
+    }
+
 }
