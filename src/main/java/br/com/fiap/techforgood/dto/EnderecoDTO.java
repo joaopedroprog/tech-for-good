@@ -5,6 +5,7 @@ import br.com.fiap.techforgood.entity.UsuarioEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import java.util.Date;
 
@@ -19,16 +20,10 @@ public class EnderecoDTO {
     private String dsComplemento;
     private String nrCep;
     private BairroDTO bairro;
-    private EntidadeDTO entidade;
 
-    public EnderecoDTO(EnderecoEntity enderecoEntity){
-        this.idEndereco = enderecoEntity.getIdEndereco();
-        this.dsLogradouro = enderecoEntity.getDsLogradouro();
-        this.nrNumero = enderecoEntity.getNrNumero();
-        this.dsComplemento = enderecoEntity.getDsComplemento();
-        this.nrCep = enderecoEntity.getNrCep();
-        bairro = new BairroDTO();
-        entidade = new EntidadeDTO();
+    public EnderecoEntity toEntity() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, EnderecoEntity.class);
     }
 
 }

@@ -4,6 +4,7 @@ import br.com.fiap.techforgood.entity.BairroEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 @Data
 @NoArgsConstructor
@@ -13,9 +14,9 @@ public class BairroDTO {
     private Long idBairro;
     private String dsBairro;
 
-    public BairroDTO(BairroEntity bairroEntity){
-        this.idBairro = bairroEntity.getIdBairro();
-        this.dsBairro = bairroEntity.getDsBairro();
+    public BairroEntity toEntity() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, BairroEntity.class);
     }
 
 }

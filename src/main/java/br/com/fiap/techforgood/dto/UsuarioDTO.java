@@ -4,6 +4,7 @@ import br.com.fiap.techforgood.entity.UsuarioEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import java.util.Date;
 
@@ -16,14 +17,13 @@ public class UsuarioDTO {
     private String nmUsuario;
     private Date dtNascimento;
     private String nrCpf;
+    private String nmEmail;
+    private String dsSenha;
     private EnderecoDTO endereco;
 
-    public UsuarioDTO(UsuarioEntity usuarioEntity){
-        this.idUsuario = usuarioEntity.getIdUsuario();
-        this.nmUsuario = usuarioEntity.getNmUsuario();
-        this.dtNascimento = usuarioEntity.getDtNascimento();
-        this.nrCpf = usuarioEntity.getNrCpf();
-        endereco = new EnderecoDTO();
+    public UsuarioEntity toEntity() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, UsuarioEntity.class);
     }
 
 }

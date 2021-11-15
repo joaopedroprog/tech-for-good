@@ -1,13 +1,9 @@
 package br.com.fiap.techforgood.repository;
 
+import br.com.fiap.techforgood.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-
-import br.com.fiap.techforgood.entity.EnderecoEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EnderecoRepository extends JpaRepository<EnderecoEntity, Long> {
-
-
+public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 }

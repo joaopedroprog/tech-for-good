@@ -4,6 +4,7 @@ import br.com.fiap.techforgood.dto.BairroDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 
@@ -16,15 +17,12 @@ public class BairroEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_bairro")
 	private Long idBairro;
-
-	@Column(name = "ds_bairro")
 	private String dsBairro;
 
-	public BairroEntity(BairroDTO bairroDTO){
-		this.idBairro = bairroDTO.getIdBairro();
-		this.dsBairro = bairroDTO.getDsBairro();
+	public BairroDTO toDTO() {
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper.map(this, BairroDTO.class);
 	}
 
 }

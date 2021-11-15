@@ -1,5 +1,6 @@
 package br.com.fiap.techforgood.controller;
 
+import br.com.fiap.techforgood.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,24 +9,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.techforgood.entity.EnderecoEntity;
-import br.com.fiap.techforgood.service.EnderecoService;
+import br.com.fiap.techforgood.service.UsuarioService;
 
 @RestController
-public class EnderecoController {
+public class UsuarioController {
 	
 	@Autowired
-	private EnderecoService enderecoService;
+	private UsuarioService usuarioService;
 	
 	@ResponseBody
-    @PostMapping("/endereco")
-    public ResponseEntity createEndereco(@RequestBody EnderecoEntity enderecoEntity) {
-
+    @PostMapping("/usuario")
+    public ResponseEntity<?> createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(this.enderecoService.createEndereco(enderecoEntity));
+            return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.createUsuario(usuarioDTO));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar bairro!");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar usuario!");
         }
         
     }

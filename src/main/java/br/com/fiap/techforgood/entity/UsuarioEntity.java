@@ -4,6 +4,7 @@ import br.com.fiap.techforgood.dto.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,24 +19,19 @@ public class UsuarioEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long idUsuario;
-
     private String nmUsuario;
-
     private Date dtNascimento;
-
     private String nrCpf;
+    private String nmEmail;
+    private String dsSenha;
 
-    @ManyToOne
-    @JoinColumn(name = "id_endereco")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idEndereco")
     private EnderecoEntity endereco;
 
-
-    public UsuarioEntity(UsuarioDTO usuarioDTO){
-        this.idUsuario = usuarioDTO.getIdUsuario();
-        this.nmUsuario = usuarioDTO.getNmUsuario();
-        this.dtNascimento = usuarioDTO.getDtNascimento();
-        this.nrCpf = usuarioDTO.getNrCpf();
-        this.endereco = new EnderecoEntity(usuarioDTO.getEndereco());
-
+    public UsuarioDTO toDTO() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, UsuarioDTO.class);
     }
+
 }
