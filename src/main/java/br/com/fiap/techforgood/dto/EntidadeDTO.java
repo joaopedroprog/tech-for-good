@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 @AllArgsConstructor
 public class EntidadeDTO {
 
+    private Long idEntidade;
     private String nmEntidade;
     private String dsEntidade;
     private Integer nrVoluntarios;

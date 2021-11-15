@@ -19,8 +19,6 @@ public class EventoEntity {
 
     private Date dtEvento;
 
-    @OneToMany
-    @Column(name = "tb_entidade_id_entidade")
     private Long idEntidade;
 
 }
