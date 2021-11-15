@@ -1,6 +1,9 @@
 package br.com.fiap.techforgood.entity;
 
+import br.com.fiap.techforgood.dto.DoacaoDTO;
+import br.com.fiap.techforgood.dto.EventoDTO;
 import lombok.Data;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +14,7 @@ import java.util.Date;
 public class EventoEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEvento;
 
     private String nmEvento;
@@ -19,6 +23,13 @@ public class EventoEntity {
 
     private Date dtEvento;
 
-    private Long idEntidade;
+    @ManyToOne
+    @JoinColumn(name = "id_entidade")
+    private EntidadeEntity entidade;
+
+    public EventoDTO toDTO() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, EventoDTO.class);
+    }
 
 }

@@ -1,8 +1,11 @@
 package br.com.fiap.techforgood.dto;
 
+import br.com.fiap.techforgood.entity.DoacaoEntity;
+import br.com.fiap.techforgood.entity.EventoEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import java.util.Date;
 
@@ -17,4 +20,8 @@ public class EventoDTO {
     private Date dtEvento;
     private EntidadeDTO entidade;
 
+    public EventoEntity toEntity() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, EventoEntity.class);
+    }
 }
