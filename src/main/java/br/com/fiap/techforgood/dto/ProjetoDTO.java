@@ -1,8 +1,11 @@
 package br.com.fiap.techforgood.dto;
 
+import br.com.fiap.techforgood.entity.ProjetoEntity;
+import br.com.fiap.techforgood.entity.UsuarioEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import java.util.Date;
 import java.util.List;
@@ -22,4 +25,8 @@ public class ProjetoDTO {
     private EntidadeDTO entidade;
     private List<DiasSemanaDTO> diasVoluntariado;
 
+    public ProjetoEntity toEntity() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, ProjetoEntity.class);
+    }
 }
