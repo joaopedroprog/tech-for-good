@@ -38,11 +38,15 @@ public class EntidadeController {
         }
     }
 
-//    @PutMapping("/update-entidade/{idEntidade}")
-//    public ResponseEntity updateEntidade(@RequestBody EntidadeDTO entidadeDTO, @PathVariable Long idEntidade){
-//        String retorno = entidadeService.updateEntidade(entidadeDTO, idEntidade);
-//        return ResponseEntity.ok().body(retorno);
-//    }
+    @PutMapping("/update-entidade/{idEntidade}")
+    public ResponseEntity updateEntidade(@RequestBody EntidadeDTO entidadeDTO, @PathVariable Long idEntidade){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(entidadeService.updateEntidade(entidadeDTO, idEntidade));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar usuário!");
+        }
+    }
 
     @DeleteMapping("/delete-entidade/{idEntidade}")
     public ResponseEntity deleteEntidade(@PathVariable Long idEntidade) {
