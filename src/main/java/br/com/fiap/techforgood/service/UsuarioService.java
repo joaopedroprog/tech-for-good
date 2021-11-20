@@ -1,7 +1,9 @@
 package br.com.fiap.techforgood.service;
 
 import br.com.fiap.techforgood.dto.UsuarioDTO;
+import br.com.fiap.techforgood.entity.ProjetoEntity;
 import br.com.fiap.techforgood.entity.UsuarioEntity;
+import br.com.fiap.techforgood.repository.ProjetoRepository;
 import br.com.fiap.techforgood.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private ProjetoRepository projetoRepository;
 
 	public UsuarioDTO createUsuario(UsuarioDTO usuarioDTO) {
 		return this.usuarioRepository.save(usuarioDTO.toEntity()).toDTO();
@@ -45,4 +49,19 @@ public class UsuarioService {
 		}
 		return this.usuarioRepository.save(usuarioEntity).toDTO();
 	}
+
+    public UsuarioDTO participarProjeto(Long idUsuario, Long idProjeto) {
+		UsuarioEntity usuarioEntity = this.usuarioRepository.findById(idUsuario).get();
+		ProjetoEntity projetoEntity = this.projetoRepository.findById(idProjeto).get();
+		if(usuarioEntity != null && projetoEntity != null) {
+			usuarioEntity.getProjetos().add(projetoEntity);
+			projetoEntity.getUsuarios().add(usuarioEntity);
+		}
+		this.projetoRepository.save(projetoEntity);
+		return usuarioEntity.toDTO();
+		/*
+		this.usuarioRepository.participarProjeto(idUsuario, idProjeto);
+		return null;
+		*/
+    }
 }

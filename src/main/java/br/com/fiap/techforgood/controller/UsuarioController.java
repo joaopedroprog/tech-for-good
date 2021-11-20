@@ -28,7 +28,7 @@ public class UsuarioController {
         
     }
 
-    @GetMapping("/buscar/{idUsuario}")
+    @GetMapping("{idUsuario}")
     public ResponseEntity<?> getUsuario(@PathVariable Long idUsuario) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.getUsuario(idUsuario));
@@ -37,7 +37,7 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/atualizar/{idUsuario}")
+    @PutMapping("{idUsuario}")
     public ResponseEntity<?> updateUsuario(@PathVariable Long idUsuario, @RequestBody UsuarioDTO usuarioDTO) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.updateUsuario(idUsuario, usuarioDTO));
@@ -47,13 +47,26 @@ public class UsuarioController {
         }
     }
 
-    @DeleteMapping("/excluir/{idUsuario}")
+    @DeleteMapping("{idUsuario}")
     public ResponseEntity<?> deleteUsuario(@PathVariable Long idUsuario) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.deleteUsuario(idUsuario));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir usuário!");
+        }
+    }
+
+    @PutMapping("/participar-projeto")
+    public ResponseEntity<?> participarProjeto(
+            @RequestParam(name="idUsuario", required = true) Long idUsuario,
+            @RequestParam(name="idProjeto", required = true) Long idProjeto
+            ) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.participarProjeto(idUsuario, idProjeto));
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao adicionar projeto para usuário");
         }
     }
 

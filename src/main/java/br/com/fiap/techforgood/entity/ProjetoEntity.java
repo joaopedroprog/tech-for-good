@@ -1,6 +1,5 @@
 package br.com.fiap.techforgood.entity;
 
-import br.com.fiap.techforgood.dto.EntidadeDTO;
 import br.com.fiap.techforgood.dto.ProjetoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +51,15 @@ public class ProjetoEntity {
             inverseJoinColumns = @JoinColumn(name = "id_dias_semana", insertable = false, updatable = false)
     )
     private List<DiasSemanaEntity> diasVoluntariado;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE})
+    @JoinTable(name = "tb_usuario_proj",
+        joinColumns = @JoinColumn(name = "id_usuario"),
+        inverseJoinColumns = @JoinColumn(name = "id_projeto")
+    )
+    private List<UsuarioEntity> usuarios = new ArrayList<>();
 
     public ProjetoDTO toDTO() {
         ModelMapper modelMapper = new ModelMapper();

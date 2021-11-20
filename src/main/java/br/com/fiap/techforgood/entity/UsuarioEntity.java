@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_usuario")
@@ -28,6 +30,9 @@ public class UsuarioEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idEndereco")
     private EnderecoEntity endereco;
+
+    @ManyToMany(mappedBy = "usuarios")
+    private List<ProjetoEntity> projetos = new ArrayList<>();
 
     public UsuarioDTO toDTO() {
         ModelMapper modelMapper = new ModelMapper();
