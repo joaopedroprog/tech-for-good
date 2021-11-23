@@ -38,6 +38,18 @@ public class EntidadeController {
         }
     }
 
+    @ResponseBody
+    @GetMapping("/get-all-entidade/{idEntidade}")
+    public ResponseEntity getAllEntidade() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(entidadeService.getAllEntidade());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao buscar entidade!");
+        }
+    }
+
     @PutMapping("/update-entidade/{idEntidade}")
     public ResponseEntity updateEntidade(@RequestBody EntidadeDTO entidadeDTO, @PathVariable Long idEntidade){
         try {

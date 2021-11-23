@@ -7,6 +7,7 @@ import br.com.fiap.techforgood.repository.EntidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +24,11 @@ public class EntidadeService {
     public EntidadeEntity getEntidade(Long idEntidade) {
         Optional<EntidadeEntity> optional = entidadeRepository.findById(idEntidade);
         return optional.get();
+    }
+
+    public List<EntidadeEntity> getAllEntidade() {
+        List<EntidadeEntity> lista = entidadeRepository.findAll();
+        return lista;
     }
 
     public EntidadeDTO updateEntidade(EntidadeDTO entidadeDTO, Long idEntidade) {
