@@ -2,6 +2,7 @@ package br.com.fiap.techforgood.controller;
 
 import br.com.fiap.techforgood.dto.EntidadeDTO;
 import br.com.fiap.techforgood.service.EntidadeService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@Api(tags = "Entidade", value = "entidade")
 public class EntidadeController {
 
     @Autowired
@@ -39,7 +41,7 @@ public class EntidadeController {
     }
 
     @ResponseBody
-    @GetMapping("/get-all-entidade/{idEntidade}")
+    @GetMapping("/get-all-entidade")
     public ResponseEntity getAllEntidade() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(entidadeService.getAllEntidade());

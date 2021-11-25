@@ -1,6 +1,7 @@
 package br.com.fiap.techforgood.controller;
 
 import br.com.fiap.techforgood.dto.UsuarioDTO;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import br.com.fiap.techforgood.service.UsuarioService;
 import javax.websocket.server.PathParam;
 
 @RestController
+@Api(tags = "Usuario", value = "usuario")
 @RequestMapping("/usuario")
 public class UsuarioController {
 	

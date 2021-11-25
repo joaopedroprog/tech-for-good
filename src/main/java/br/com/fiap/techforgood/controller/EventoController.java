@@ -2,12 +2,14 @@ package br.com.fiap.techforgood.controller;
 
 import br.com.fiap.techforgood.dto.EventoDTO;
 import br.com.fiap.techforgood.service.EventoService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Api(tags = "Evento", value = "evento")
 public class EventoController {
 
     @Autowired
